@@ -34,6 +34,4 @@ script:
   - popd
   
   - mkdir ./target/cov
-  - PATH="$tmp/usr/local/bin:$PATH" kcov --verify\
-    --coveralls-id=$TRAVIS_JOB_ID \
-    --include-pattern '/src' ./target/cov ./target/debug/test_ci
+  - PATH="$tmp/usr/local/bin:$PATH" kcov --verify --coveralls-id=$TRAVIS_JOB_ID --include-pattern './src' ./target/cov ./target/debug/test_ci
