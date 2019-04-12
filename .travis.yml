@@ -1,0 +1,9 @@
+language: rust
+
+matrix:
+  include:
+    - rust: stable
+
+script:
+  - cargo build
+  - cargo test
