@@ -21,12 +21,19 @@ addons:
 script:
   - cargo build
   - cargo test
+  
+  - tmp=$(mktemp -d)
+  - pushd "$tmp"
   - wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
   - tar zxf master.tar.gz
   - mkdir kcov-master/build
   - cd kcov-master/build
   - cmake ..
   - make
-  - make install
+  - make install DESTDIR="$tmp"
+  - popd
+  
   - mkdir ./target/cov
-  - kcov --verify --coveralls-id=$TRAVIS_JOB_ID --include-pattern '/src' ./target/cov ./target/debug/test_ci
+  - PATH="$tmp/usr/local/bin:$PATH" kcov --verify\
+    --coveralls-id=$TRAVIS_JOB_ID \
+    --include-pattern '/src' ./target/cov ./target/debug/test_ci
