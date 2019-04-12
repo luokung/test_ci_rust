@@ -13,7 +13,6 @@ addons:
       - libdw-dev
       - binutils-dev
       - wget
-      - clang-3.6
       - cmake
       - python
       - python-virtualenv
@@ -33,5 +32,5 @@ script:
   - make install DESTDIR="$tmp"
   - popd
   
-  - mkdir ./target/cov
-  - PATH="$tmp/usr/local/bin:$PATH" kcov --verify --coveralls-id=$TRAVIS_JOB_ID --include-pattern './src' ./target/cov ./target/debug/test_ci
+  - mkdir target/cov
+  - PATH="$tmp/usr/local/bin:$PATH" kcov --verify --coveralls-id=$TRAVIS_JOB_ID --include-pattern src target/cov target/debug/test_ci
